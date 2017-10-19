@@ -28,49 +28,13 @@ import javax.sql.DataSource;
 @Configuration
 public class OAuth2Configuration {
 
-    @Configuration
-    @EnableResourceServer
-    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-
-        @Autowired
-        private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-
-        @Autowired
-        private CustomLogoutSuccessHandler customLogoutSuccessHandler;
-
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-
-            http
-                    .exceptionHandling()
-                    .authenticationEntryPoint(customAuthenticationEntryPoint)
-                    .and()
-                    .logout()
-                    .logoutUrl("/oauth/logout")
-                    .logoutSuccessHandler(customLogoutSuccessHandler)
-                    .and()
-                    .csrf()
-                    .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
-                    .disable()
-                    .headers()
-                    .frameOptions().disable()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .authorizeRequests()
-                    .antMatchers("/hello/").permitAll()
-                    .antMatchers("/secure/**").authenticated();
-
-        }
-
-    }
 
     @Configuration
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter implements EnvironmentAware {
 
         private static final String ENV_OAUTH = "authentication.oauth.";
-        private static final String PROP_CLIENTID = "clientid";
+        private static final String PROP_CLIENTID = "clientId";
         private static final String PROP_SECRET = "secret";
         private static final String PROP_TOKEN_VALIDITY_SECONDS = "tokenValidityInSeconds";
 
@@ -114,5 +78,43 @@ public class OAuth2Configuration {
         }
 
     }
+
+    @Configuration
+    @EnableResourceServer
+    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+
+        @Autowired
+        private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+        @Autowired
+        private CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
+        @Override
+        public void configure(HttpSecurity http) throws Exception {
+
+            http
+                    .exceptionHandling()
+                    .authenticationEntryPoint(customAuthenticationEntryPoint)
+                    .and()
+                    .logout()
+                    .logoutUrl("/oauth/logout")
+                    .logoutSuccessHandler(customLogoutSuccessHandler)
+                    .and()
+                    .csrf()
+                    .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
+                    .disable()
+                    .headers()
+                    .frameOptions().disable()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/hello/").permitAll()
+                    .antMatchers("/secure/**").authenticated();
+
+        }
+
+    }
+
 
 }
