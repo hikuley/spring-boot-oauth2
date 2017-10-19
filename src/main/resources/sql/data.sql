@@ -6,7 +6,6 @@ INSERT INTO user (username,email, password, activated) VALUES ('hikuley', 'admin
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 
-INSERT INTO user_authority (username,authority) VALUES ('rajith', 'ROLE_USER');
 INSERT INTO user_authority (username,authority) VALUES ('user', 'ROLE_USER');
 INSERT INTO user_authority (username,authority) VALUES ('admin', 'ROLE_USER');
 INSERT INTO user_authority (username,authority) VALUES ('admin', 'ROLE_ADMIN');

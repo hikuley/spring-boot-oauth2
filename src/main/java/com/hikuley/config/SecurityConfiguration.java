@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
     private UserDetailsService userDetailsService;
 
