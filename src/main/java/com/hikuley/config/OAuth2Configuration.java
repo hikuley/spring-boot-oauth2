@@ -97,11 +97,11 @@ public class OAuth2Configuration {
                     .authenticationEntryPoint(customAuthenticationEntryPoint)
                     .and()
                     .logout()
-                    .logoutUrl("/oauth/logout")
+                    .logoutUrl("/api/oauth/logout")
                     .logoutSuccessHandler(customLogoutSuccessHandler)
                     .and()
                     .csrf()
-                    .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize"))
+                    .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/api/oauth/authorize"))
                     .disable()
                     .headers()
                     .frameOptions().disable()
@@ -109,8 +109,8 @@ public class OAuth2Configuration {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/hello/").permitAll()
-                    .antMatchers("/secure/**").authenticated();
+                    .antMatchers("/api/hello").permitAll()
+                    .antMatchers("/api/**").authenticated();
 
         }
 
