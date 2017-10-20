@@ -33,7 +33,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         String lowercaseLogin = login.toLowerCase();
 
         User userFromDatabase;
-        if(lowercaseLogin.contains("@")) {
+        if (lowercaseLogin.contains("@")) {
             userFromDatabase = userRepository.findByEmail(lowercaseLogin);
         } else {
             userFromDatabase = userRepository.findByUsernameCaseInsensitive(lowercaseLogin);
